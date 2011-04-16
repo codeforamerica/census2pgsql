@@ -702,4 +702,5 @@ CREATE TABLE "census" (gid serial PRIMARY KEY,
   "H0010003" integer);
 SELECT AddGeometryColumn('','census','the_geom','4269','POINT',2);
 CREATE INDEX idx_the_geom ON census USING GIST (the_geom); 
+CREATE INDEX idx_logrecno ON census ("LOGRECNO"); 
 COMMIT;
