@@ -1,0 +1,1 @@
+for FILE in *22010.pl; do echo "set client_encoding = 'latin1'; COPY pt2_staging from '/home/donkey/code/census2pgsql/data/$FILE'" | psql -d census2010; done
