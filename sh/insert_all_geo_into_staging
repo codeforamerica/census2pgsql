@@ -1,1 +1,0 @@
-for FILE in *geo*; do echo "set client_encoding = 'latin1'; COPY geo_staging from '/home/donkey/code/census2pgsql/data/$FILE'" | psql -d census2010; done

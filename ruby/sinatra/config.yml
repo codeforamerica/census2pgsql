@@ -1,0 +1,7 @@
+--- 
+database: 
+  host: donkey.local
+  port: 5432
+  db: census2010
+  user: postgres
+  password: code4america
