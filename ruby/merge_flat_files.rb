@@ -100,21 +100,21 @@ geo_file_def = [{"id"=>"FILEID", "type"=>"Text", "len"=>6},
  {"id"=>"PUMA", "type"=>"Text", "len"=>5},
  {"id"=>"RESERVED", "type"=>"Text", "len"=>18}
 ]
-
+pos=0
+precomputed_ranges=geo_file_def.map do |d|
+	start=pos
+	last = pos+d["len"]-1
+	pos=the_end+1
+	[start,last]
+end
 
 states = ['ak', 'al', 'ar', 'az', 'ca', 'co', 'ct', 'dc', 'de', 'fl', 'ga', 'hi', 'la', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mn', 'mo', 'ms', 'mt', 'nc', 'nd', 'ne', 'nh', 'nj', 'nm', 'nv', 'ny', 'oh', 'ok', 'or', 'pa', 'pr', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy']
 
 #states = ['dc']
 
 def parse_geo(line, file_def)
-  pos = 0
   
-  vals = file_def.map do |d|    
-    len = d['len']
-    start = pos
-    last = pos+len
-    pos = last
-
+  vals = precomputed_ranges.map do |(start,last)|
     line[start...last].strip
   end
   
