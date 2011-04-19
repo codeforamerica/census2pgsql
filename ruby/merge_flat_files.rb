@@ -104,7 +104,7 @@ pos=0
 precomputed_ranges=geo_file_def.map do |d|
 	start=pos
 	last = pos+d["len"]-1
-	pos=the_end+1
+	pos=last+1
 	[start,last]
 end
 
@@ -112,9 +112,9 @@ states = ['ak', 'al', 'ar', 'az', 'ca', 'co', 'ct', 'dc', 'de', 'fl', 'ga', 'hi'
 
 DELIM = '|'
 
-def parse_geo(line, file_def)
+def parse_geo(line, field_ranges)
   
-  vals = precomputed_ranges.map do |(start,last)|
+  vals = field_ranges.map do |(start,last)|
     line[start...last].strip
   end
   
@@ -139,7 +139,7 @@ states.each do |state|
     pt1_line = pt1_file.readline()
     pt2_line = pt2_file.readline()
     
-    out_file << parse_geo(geo_line, geo_file_def) << DELIM << trim_dup_cols(pt1_line) << DELIM << trim_dup_cols(pt2_line) << "\n"
+    out_file << parse_geo(geo_line, precomputed_ranges) << DELIM << trim_dup_cols(pt1_line) << DELIM << trim_dup_cols(pt2_line) << "\n"
   end
   
   geo_file.close
