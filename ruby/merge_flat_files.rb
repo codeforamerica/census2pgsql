@@ -104,7 +104,7 @@ geo_file_def = [{"id"=>"FILEID", "type"=>"Text", "len"=>6},
 
 states = ['ak', 'al', 'ar', 'az', 'ca', 'co', 'ct', 'dc', 'de', 'fl', 'ga', 'hi', 'la', 'id', 'il', 'in', 'ks', 'ky', 'la', 'ma', 'md', 'me', 'mi', 'mn', 'mo', 'ms', 'mt', 'nc', 'nd', 'ne', 'nh', 'nj', 'nm', 'nv', 'ny', 'oh', 'ok', 'or', 'pa', 'pr', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy']
 
-#states = ['dc']
+delim = '|'
 
 def parse_geo(line, file_def)
   pos = 0
@@ -118,11 +118,11 @@ def parse_geo(line, file_def)
     line[start...last].strip
   end
   
-  vals.join(',')
+  vals.join(delim)
 end
 
 def trim_dup_cols(line)
-  line.chomp.split(',')[5..-1].join(',')
+  line.chomp.split(',')[5..-1].join(delim)
 end
 
 states.each do |state| 
@@ -139,7 +139,7 @@ states.each do |state|
     pt1_line = pt1_file.readline()
     pt2_line = pt2_file.readline()
     
-    out_file << parse_geo(geo_line, geo_file_def) << "," << trim_dup_cols(pt1_line) << "," << trim_dup_cols(pt2_line) << "\n"
+    out_file << parse_geo(geo_line, geo_file_def) << delim << trim_dup_cols(pt1_line) << delim << trim_dup_cols(pt2_line) << "\n"
   end
   
   geo_file.close
