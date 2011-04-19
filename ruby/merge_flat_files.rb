@@ -122,7 +122,7 @@ def parse_geo(line, file_def)
 end
 
 def trim_dup_cols(line)
-  line.chomp!.split(',')[5..-1].join(',')
+  line.chomp.split(',')[5..-1].join(',')
 end
 
 states.each do |state| 
