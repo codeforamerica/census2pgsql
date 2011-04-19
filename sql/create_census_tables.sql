@@ -153,6 +153,7 @@ CREATE TABLE pt1_staging("FILEID" varchar(256),
   "P0020071" integer,
   "P0020072" integer,
   "P0020073" integer);
+CREATE UNIQUE INDEX idx_state_and_record_pt1 ON pt1_staging ("STUSAB","LOGRECNO");
   
 CREATE TABLE pt2_staging("FILEID" varchar(256),
   "STUSAB" varchar(256),
@@ -306,6 +307,7 @@ CREATE TABLE pt2_staging("FILEID" varchar(256),
   "H0010001" integer,
   "H0010002" integer,
   "H0010003" integer);
+CREATE UNIQUE INDEX idx_state_and_record_pt2 ON pt2_staging ("STUSAB","LOGRECNO");
 
 CREATE TABLE "census" (gid serial PRIMARY KEY,
   "FILEID" varchar(256),
@@ -702,6 +704,6 @@ CREATE TABLE "census" (gid serial PRIMARY KEY,
   "H0010003" integer);
 SELECT AddGeometryColumn('','census','the_geom','4269','POINT',2);
 CREATE INDEX idx_the_geom ON census USING GIST (the_geom); 
-CREATE INDEX idx_logrecno ON census ("LOGRECNO"); 
 CREATE INDEX idx_sumlev ON census ("SUMLEV"); 
+CREATE UNIQUE INDEX idx_state_and_record ON census ("STUSAB","LOGRECNO");
 COMMIT;
