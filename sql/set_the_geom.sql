@@ -1,0 +1,1 @@
+UPDATE census SET "the_geom" =  ST_SetSRID(ST_Point("INTPTLON", "INTPTLAT"), 4269);
