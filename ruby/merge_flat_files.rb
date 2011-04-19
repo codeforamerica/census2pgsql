@@ -115,7 +115,7 @@ DELIM = '|'
 def parse_geo(line, field_ranges)
   
   vals = field_ranges.map do |(start,last)|
-    line[start...last].strip
+    line[start..last].strip
   end
   
   vals.join(DELIM)
