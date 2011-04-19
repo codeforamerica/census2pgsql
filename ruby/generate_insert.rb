@@ -117,4 +117,4 @@ insert_part = columns.map{|x| "\"#{x["id"]}\""}*", "
 table_name = "census"
 stage_name = "geo_staging"
 
-File.open("giant_statement","w") {|f| f<< "INSERT INTO #{table_name}(#{insert_part}) SELECT #{substring_part} FROM #{stage_name};"}
+File.open("insert_geo_to_final.sql","w") {|f| f<< "INSERT INTO #{table_name}(#{insert_part}) SELECT #{substring_part} FROM #{stage_name};"}

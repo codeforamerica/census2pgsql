@@ -297,8 +297,8 @@ part2_cols=[
  {"id"=>"H0010003", "type"=>"Integer", "len"=>4}]
 
 cols=part1_cols.map {|x| "\"#{x['id']}\" = #{stage_name}.\"#{x['id']}\""} * ", "
-File.open("update_part1","w") {|f| f<<"UPDATE #{table_name} SET #{cols} FROM #{stage_name} WHERE #{table_name}.\"LOGRECNO\" = #{stage_name}.\"LOGRECNO\";"}
+File.open("update_part1_to_final.sql","w") {|f| f<<"UPDATE #{table_name} SET #{cols} FROM #{stage_name} WHERE #{table_name}.\"LOGRECNO\" = #{stage_name}.\"LOGRECNO\";"}
 
 stage_name = "pt2_staging"
 cols=part2_cols.map {|x| "\"#{x['id']}\" = #{stage_name}.\"#{x['id']}\""} * ", "
-File.open("update_part2","w") {|f| f<<"UPDATE #{table_name} SET #{cols} FROM #{stage_name} WHERE #{table_name}.\"LOGRECNO\" = #{stage_name}.\"LOGRECNO\";"}
+File.open("update_part2_to_final.sql","w") {|f| f<<"UPDATE #{table_name} SET #{cols} FROM #{stage_name} WHERE #{table_name}.\"LOGRECNO\" = #{stage_name}.\"LOGRECNO\" AND #{table_name}.\"STUSAB\" = #{stage_name}.\"STUSAB\";"}
