@@ -2,7 +2,6 @@ require 'sinatra'
 require 'json'
 require 'pg'
 require 'yaml'
-require 'sinatra/base'
 
 class CensusService < Sinatra::Base
   $db_config = YAML::load_file('config.yml')['database']
