@@ -1,2 +1,2 @@
-require 'census-service'
+require 'census_service'
 run CensusService
