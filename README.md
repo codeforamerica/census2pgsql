@@ -10,7 +10,7 @@ Prerequisites
 
 Getting Started
 ------------
-Follow these instructions in our [wiki](http://github.com/codeforamerica/census2pgsql/).
+Follow these instructions in our [wiki](https://github.com/codeforamerica/census2pgsql/wiki/Getting-Started).
     
 Contributing
 ------------
