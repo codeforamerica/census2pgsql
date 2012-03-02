@@ -125,25 +125,34 @@ def trim_dup_cols(line)
   line.chomp.split(',')[5..-1].join(DELIM)
 end
 
-states.each do |state| 
-  puts "#{state}000012010.pl"
-  puts "#{state}000022010.pl"
-  puts "#{state}geo2010.pl"
+DATA_DIR = '../data/'
 
-  geo_file = File.new("../data/#{state}geo2010.pl", "r")
-  pt1_file = File.new("../data/#{state}000012010.pl", "r")
-  pt2_file = File.new("../data/#{state}000022010.pl", "r")
-  out_file = File.new("../data/#{state}_merged.csv", "w")
+states.each do |state| 
+  geo_filename = "#{DATA_DIR}/#{state}geo2010.pl"
+  pt1_filename = "#{DATA_DIR}/#{state}000012010.pl"
+  pt2_filename = "#{DATA_DIR}/#{state}000022010.pl"
   
-  geo_file.each do |geo_line|
-    pt1_line = pt1_file.readline()
-    pt2_line = pt2_file.readline()
+  unless File.readable?(geo_filename) && File.readable?(pt1_filename) && File.readable?(pt2_filename)
+    puts "#{state} (skipping)"
+  else
+    puts "#{state}"
     
-    out_file << parse_geo(geo_line, precomputed_ranges) << DELIM << trim_dup_cols(pt1_line) << DELIM << trim_dup_cols(pt2_line) << "\n"
+    geo_file = File.new(geo_filename, "r")
+    pt1_file = File.new(pt1_filename, "r")
+    pt2_file = File.new(pt2_filename, "r")
+    out_file = File.new("#{DATA_DIR}/#{state}_merged.csv", "w")
+
+    geo_file.each do |geo_line|
+      pt1_line = pt1_file.readline()
+      pt2_line = pt2_file.readline()
+
+      out_file << parse_geo(geo_line, precomputed_ranges) << DELIM << trim_dup_cols(pt1_line) << DELIM << trim_dup_cols(pt2_line) << "\n"
+    end
+
+    geo_file.close
+    pt1_file.close
+    pt2_file.close
+    out_file.close
   end
-  
-  geo_file.close
-  pt1_file.close
-  pt2_file.close
-  out_file.close
+
 end
