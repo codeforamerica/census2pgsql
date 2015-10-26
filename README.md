@@ -50,5 +50,3 @@ Copyright
 ---------
 Copyright (c) 2010 Code for America Laboratories
 See [LICENSE](https://github.com/codeforamerica/census2pgsql/blob/master/LICENSE.md) for details.
-
-[![Code for America Tracker](http://stats.codeforamerica.org/codeforamerica/census2pgsql.png)](http://stats.codeforamerica.org/projects/census2pgsql)
